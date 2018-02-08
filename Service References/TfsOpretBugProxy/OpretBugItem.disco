@@ -1,0 +1,6 @@
+<?xml version="1.0" encoding="utf-8"?>
+<discovery xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns="http://schemas.xmlsoap.org/disco/">
+  <contractRef ref="http://virfacilia:8081/OpretBugItem.asmx?wsdl" docRef="http://virfacilia:8081/OpretBugItem.asmx" xmlns="http://schemas.xmlsoap.org/disco/scl/" />
+  <soap address="http://virfacilia:8081/OpretBugItem.asmx" xmlns:q1="dk.dsa.facit.guifacitconnector/" binding="q1:OpretBugItemSoap" xmlns="http://schemas.xmlsoap.org/disco/soap/" />
+  <soap address="http://virfacilia:8081/OpretBugItem.asmx" xmlns:q2="dk.dsa.facit.guifacitconnector/" binding="q2:OpretBugItemSoap12" xmlns="http://schemas.xmlsoap.org/disco/soap/" />
+</discovery>

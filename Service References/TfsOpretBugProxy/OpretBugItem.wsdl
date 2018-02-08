@@ -1,0 +1,96 @@
+<?xml version="1.0" encoding="utf-8"?>
+<wsdl:definitions xmlns:soapenc="http://schemas.xmlsoap.org/soap/encoding/" xmlns:mime="http://schemas.xmlsoap.org/wsdl/mime/" xmlns:tns="dk.dsa.facit.guifacitconnector/" xmlns:s="http://www.w3.org/2001/XMLSchema" xmlns:s1="http://microsoft.com/wsdl/types/" xmlns:soap="http://schemas.xmlsoap.org/wsdl/soap/" xmlns:tm="http://microsoft.com/wsdl/mime/textMatching/" xmlns:http="http://schemas.xmlsoap.org/wsdl/http/" xmlns:soap12="http://schemas.xmlsoap.org/wsdl/soap12/" targetNamespace="dk.dsa.facit.guifacitconnector/" xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/">
+  <wsdl:types>
+    <s:schema elementFormDefault="qualified" targetNamespace="dk.dsa.facit.guifacitconnector/">
+      <s:import namespace="http://microsoft.com/wsdl/types/" />
+      <s:element name="AnmeldEnfejl">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="hentetData" type="tns:AnmeldFejlDto" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:complexType name="AnmeldFejlDto">
+        <s:complexContent mixed="false">
+          <s:extension base="tns:LogableDto">
+            <s:sequence>
+              <s:element minOccurs="0" maxOccurs="1" name="File" type="s:string" />
+              <s:element minOccurs="0" maxOccurs="1" name="Data" type="s:base64Binary" />
+              <s:element minOccurs="0" maxOccurs="1" name="CurrentUserFullName" type="s:string" />
+              <s:element minOccurs="0" maxOccurs="1" name="CprNummer" type="s:string" />
+              <s:element minOccurs="0" maxOccurs="1" name="CurrentProcessNavn" type="s:string" />
+              <s:element minOccurs="0" maxOccurs="1" name="ProcesTrin" type="s:string" />
+              <s:element minOccurs="0" maxOccurs="1" name="Beskrivelse" type="s:string" />
+              <s:element minOccurs="1" maxOccurs="1" name="ProcesInstansId" type="s1:guid" />
+              <s:element minOccurs="0" maxOccurs="1" name="AreaType" type="s:string" />
+              <s:element minOccurs="0" maxOccurs="1" name="IterationType" type="s:string" />
+              <s:element minOccurs="0" maxOccurs="1" name="Title" type="s:string" />
+              <s:element minOccurs="0" maxOccurs="1" name="RootCause" type="s:string" />
+              <s:element minOccurs="0" maxOccurs="1" name="Urgency" type="s:string" />
+              <s:element minOccurs="0" maxOccurs="1" name="Impact" type="s:string" />
+            </s:sequence>
+          </s:extension>
+        </s:complexContent>
+      </s:complexType>
+      <s:complexType name="LogableDto" abstract="true" />
+      <s:element name="AnmeldEnfejlResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="AnmeldEnfejlResult" type="s:string" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+    </s:schema>
+    <s:schema elementFormDefault="qualified" targetNamespace="http://microsoft.com/wsdl/types/">
+      <s:simpleType name="guid">
+        <s:restriction base="s:string">
+          <s:pattern value="[0-9a-fA-F]{8}-[0-9a-fA-F]{4}-[0-9a-fA-F]{4}-[0-9a-fA-F]{4}-[0-9a-fA-F]{12}" />
+        </s:restriction>
+      </s:simpleType>
+    </s:schema>
+  </wsdl:types>
+  <wsdl:message name="AnmeldEnfejlSoapIn">
+    <wsdl:part name="parameters" element="tns:AnmeldEnfejl" />
+  </wsdl:message>
+  <wsdl:message name="AnmeldEnfejlSoapOut">
+    <wsdl:part name="parameters" element="tns:AnmeldEnfejlResponse" />
+  </wsdl:message>
+  <wsdl:portType name="OpretBugItemSoap">
+    <wsdl:operation name="AnmeldEnfejl">
+      <wsdl:input message="tns:AnmeldEnfejlSoapIn" />
+      <wsdl:output message="tns:AnmeldEnfejlSoapOut" />
+    </wsdl:operation>
+  </wsdl:portType>
+  <wsdl:binding name="OpretBugItemSoap" type="tns:OpretBugItemSoap">
+    <soap:binding transport="http://schemas.xmlsoap.org/soap/http" />
+    <wsdl:operation name="AnmeldEnfejl">
+      <soap:operation soapAction="dk.dsa.facit.guifacitconnector/AnmeldEnfejl" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+  </wsdl:binding>
+  <wsdl:binding name="OpretBugItemSoap12" type="tns:OpretBugItemSoap">
+    <soap12:binding transport="http://schemas.xmlsoap.org/soap/http" />
+    <wsdl:operation name="AnmeldEnfejl">
+      <soap12:operation soapAction="dk.dsa.facit.guifacitconnector/AnmeldEnfejl" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+  </wsdl:binding>
+  <wsdl:service name="OpretBugItem">
+    <wsdl:port name="OpretBugItemSoap" binding="tns:OpretBugItemSoap">
+      <soap:address location="http://virfacilia:8081/OpretBugItem.asmx" />
+    </wsdl:port>
+    <wsdl:port name="OpretBugItemSoap12" binding="tns:OpretBugItemSoap12">
+      <soap12:address location="http://virfacilia:8081/OpretBugItem.asmx" />
+    </wsdl:port>
+  </wsdl:service>
+</wsdl:definitions>
